@@ -1,5 +1,5 @@
-import React, { createContext, useReducer } from 'react';
-// import useTodoState from '../hooks/useTodoState';
+import React, { createContext } from 'react';
+import { useLocalStorageReducer } from '../hooks/useLocalStorageReducer'
 import todosReducer from '../ruducers/todo.reducer';
 
 const defaultTodos = [
@@ -11,7 +11,7 @@ export const TodosContext = createContext();
 export const DispatchContext = createContext();
 
 export function TodosProvider(props){
-   const [todos, dispatch] = useReducer(todosReducer, defaultTodos);
+   const [todos, dispatch] = useLocalStorageReducer("todos", defaultTodos, todosReducer)
    return (
        <TodosContext.Provider value={todos}>
            <DispatchContext.Provider value={dispatch}>
